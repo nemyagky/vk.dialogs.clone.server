@@ -4,24 +4,27 @@ import UserSchema from "../models/User";
 export class RegisterController {
 
    // If user doesn't exist - add new user to database
+   // Receives name, surname, password
+   // Add user into database and return UserSchema
    public static async register(req: Request, res: Response) {
 
       try {
          const user = await this.getUser(req.body.name, req.body.surname, req.body.password);
 
          if (user === false) {
-            const userSchema = new UserSchema({
+
+            UserSchema.create({
                name: req.body.name,
                password: req.body.password,
                surname: req.body.surname
+            }, (err: any, data: any) => {
+               if (err) {
+                  res.json(err);
+               } else {
+                  res.json(data);
+               }
             });
 
-            // save() add new user into database
-            userSchema.save().then((data) => {
-               res.json(data);
-            }).catch((err) => {
-               res.json({err});
-            });
          } else {
             res.json({message: "Пользователь уже существует"});
          }
@@ -32,6 +35,8 @@ export class RegisterController {
 
    }
 
+   // Receives name, surname, password
+   // Return UserSchema, if user was found
    public static async auth(req: Request, res: Response) {
       try {
          const user = await this.getUser(req.query.name, req.query.surname, req.query.password);
@@ -45,6 +50,8 @@ export class RegisterController {
       }
    }
 
+   // Receives name, surname, password
+   // Return UserSchema, if user was found
    public static async getUser(name: string, surname: string, password: string) {
       try {
          // user will contain an array of users data;
@@ -56,7 +63,7 @@ export class RegisterController {
             return false;
          }
       } catch (e) {
-         // This string needs test
+         // TODO test this string
          console.log(e);
          throw e;
       }
