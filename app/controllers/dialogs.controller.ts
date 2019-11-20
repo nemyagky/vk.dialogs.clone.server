@@ -9,6 +9,7 @@ export class DialogsController {
 
       try {
 
+         // TODO add checking if dialog exist
          DialogSchema.create({
             usersId: ["5dcecfa3697639243471b83e", "5dcecfc0697639243471b83f"]
          }, (err: any, data: any) => {
@@ -30,7 +31,6 @@ export class DialogsController {
    // Return dialogs array
    public static async getUserDialogs(req: Request, res: Response) {
 
-      console.log(req.body);
       try {
 
          DialogSchema.find({usersId: req.body.userId}, (err, data) => {
