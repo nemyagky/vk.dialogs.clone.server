@@ -1,18 +1,10 @@
 import mongoose from "mongoose";
 
+// TODO image
 const UserSchema = new mongoose.Schema({
-   name: {
-      required: true,
-      type: String
-   },
-   password: {
-      required: true,
-      type: String
-   },
-   surname: {
-      required: true,
-      type: String
-   },
+   name: String,
+   password: String,
+   surname: String
 });
 
 export default mongoose.model("User", UserSchema, "users");

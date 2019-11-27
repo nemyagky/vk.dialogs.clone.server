@@ -4,7 +4,7 @@ import { ValidateMessageParams } from "./../validators/messages/message.validato
 
 const router = Router();
 
+// TODO delete this
 router.post("/message", ValidateMessageParams, MessageController.addMessage);
-router.get("/messages", MessageController.getMessages);
 
 export default router;

@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 // TODO date
 const MessageSchema = new mongoose.Schema({
    dialogId: String,
-   isReaded: Boolean,
+   isRead: Boolean,
    text: String,
    userId: String,
 });

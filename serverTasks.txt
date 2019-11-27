@@ -50,6 +50,6 @@
    - userID
    - time
    - text
-   - isReaded
+   - isRead
    - photosUrl
       ПОЛУЧИТЬ СООБЩЕНИЯ В ДИАЛОГЕ
