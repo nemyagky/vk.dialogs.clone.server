@@ -17,7 +17,6 @@ const DialogSchema = new mongoose.Schema({
   users: [{
     id: String,
     name: String,
-    surname: String,
   }],
 });
 

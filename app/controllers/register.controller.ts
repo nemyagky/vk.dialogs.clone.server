@@ -6,23 +6,20 @@ export class RegisterController {
    // TODO JWT tokens
 
    // If user doesn't exist - add new user to database
-   // Receives name, surname, password
+   // Receives name, password
    // Add user into database and return UserSchema
    public static async register(req: Request, res: Response) {
-
       try {
          // Check if user already exists
          const sameUser = await UserSchema.find({
             name: req.body.name,
-            password: req.body.password,
-            surname: req.body.surname
+            password: req.body.password
          });
 
-         if (!sameUser) {
+         if (!sameUser.length) {
             UserSchema.create({
                name: req.body.name,
-               password: req.body.password,
-               surname: req.body.surname
+               password: req.body.password
             }, (err: any, data: any) => {
                if (err) {
                   res.json(err);
@@ -33,23 +30,18 @@ export class RegisterController {
          } else {
             res.json({ message: "Пользователь уже существует" });
          }
-
       } catch (e) {
          res.json(e);
       }
-
    }
 
-   // Receives name, surname, password
+   // Receives name, password
    // Return UserSchema, if user was found
    public static async auth(req: Request, res: Response) {
-
       try {
-
          const userData = await UserSchema.find({
-            name: req.body.name,
-            password: req.body.password,
-            surname: req.body.surname
+            name: req.query.name,
+            password: req.query.password
          });
 
          if (userData) {
@@ -57,11 +49,9 @@ export class RegisterController {
          } else {
             res.json({ message: "Пользователь не существует" });
          }
-
       } catch (e) {
          res.json(e);
       }
-
    }
 
 }
